@@ -5,26 +5,43 @@ date: "6 mai 2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+#Domaine
+#Catégories
+#Remarques sur la constitution du corpus d'apprentissage
+#Remarques sur la création de votre réseau neuronal et sa performance
+#vos 3 fichiers de sauvegarde du réseau neuronal (.categories, .h5, *.json)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#Etudes de réseaux précédemment créés
+#Produire également un graphique à partir du fichier models.csv
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r plot1, include=FALSE}
+library(ggplot2)
 
-```{r cars}
-summary(cars)
+models <- read.csv("models.csv", sep=",",
+                   colClasses = c(rep("numeric",2), "character", 
+                                  rep("numeric",2), "character", 
+                                  rep("numeric",2)), 
+                   na.strings = "NA")
+
+str(models)
+
+names(models) <- c("Nb_classes", "Nb_neuro", "Dataset_train", "Nb_image_train", "Nb_passes", "Dataset_test", "Nb_image_test", "Tx_success")
+models$Factor <- paste(models$Nb_neuro, models$Dataset_train)
+
+#Graphe Tx de succés selon le nb de passes
+
+png("plot1.png", width = 800, height = 600)
+qplot(Nb_passes, Tx_success, data = models, color=Factor, geom = c("point", "line"))
+dev.off()
 ```
+```{r graphplot1, echo=FALSE, out.width='100%', fig.align="center"}
 
-## Including Plots
+#Inclure le png du chunk r plot1
 
-You can also embed plots, for example:
+knitr::include_graphics("plot1.png")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

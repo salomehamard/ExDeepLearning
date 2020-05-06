@@ -1,4 +1,4 @@
-Nombre de classes, Nombre de neurones dans la couche completement connectee, Dataset d'entrainement, Nombre d'images d'entrainement, Nombre passes, Dataset de test, Nombre d'images de test, Pourcentage de reussite
+Nombre de classes,Nbr_neurones_connectee,Dataset,Nbr_image_entrainement,Nbr_passes,Dataset_test,Nbr_image_test,Taux_reussite
 2,128, catdog,1589,3, cats_dogs,378,66
 2,128, catdog,1589,5, cats_dogs,378,66
 2,128, catdog,1589,10, cats_dogs,378,67
