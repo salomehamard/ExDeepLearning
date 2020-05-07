@@ -1,0 +1,87 @@
+---
+title: "Rapport TD Deep Learning"
+author: "Salomé Hamard, Anne-Laure Girard, Dylan Clair"
+date: "6 mai 2020"
+output:
+    html_document: default
+    theme : united
+
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Notre projet
+
+## Domaine
+Nous avons décidé de prendre des animaux à reconnaitre. 
+
+## Catégories
+
+Le choix des catégories doit être assez large car la reconnaissance de différences infimes n'apporteraient aucun résultats concluents.Il est néessaire que chaque catégorie contienne un nombre assez élevé d'éléments, plus il y a de photos pour alimenter le corpus d'apprentissage, meilleure sera la reconaissance des catégories. 
+Nous avons choisit les catégories : Ornithorynque, Licorne et Canard.
+
+
+## Remarques sur la constitution du corpus d'apprentissage
+
+Un corpus d'apprentissage est constitué d'une base de donnée d'images déjà identifiés comme appartenant à telle ou telle catégories. La catégorie de chaque image est connue et a été vérifié. Par la suite, ce corpus d'apprentissage va être séparé en deux sous-ensemble : un ensemble d'apprentissage à proprement dit et un ensemble de contrôle auquel le réseau neuronal pourra comparer ses réponses.
+La construction d'un corpus d'apprentissage est complexe. Il est nécessaire d'avoir une bonne base de donnée pour que le programme ait assez de renseignement sur le sujet, et qu'il sache identfier n'importe quelle image traitant d'un même sujet sans se tromper. Il faut éviter les données erronées, qui pouraient endommager le corpus d'apprentissage. Los de la construction de ce corpus certaines images sont mises de côté par le programme car elle ne sont pas assez représentatives.
+Nous avons importé 100 images pour chaque catégorie. Ce corpus d'apprentissage n'est pas très grand. Le travail du réseau neuronal ne sera donc pas très riche mais tout de même composé d'une base de donnée "propre".
+Plus le corpus d'apprentissage est grand, plus il sera performant et donc plus le réseau neuronal aura une reconnaissance correcte.
+
+## Remarques sur la création de votre réseau neuronal et sa performance
+
+Ensuite il faut entrainer le réseau de neurone pour cela, on lui donne accés aux photos du corpus d'apprentissage (constitué des différentes catégories), et le programme va essayer de reconnaitre la catégorie à laquelle appartient la photo puis il va comparer sa réponse avec les photos du dossier de contrôle qui ont été identifié par les humains. Si sa réponse corespond alors il garde en memoire sa réussite, sinon la réponse est éliminée et le réseau neuronal est modifié. Au fur et à mesure que le programme balaye le corpus d'apprentissage, les connexions entre les différents neuronnes du réseau vont être réorganisé afin de mieux en mieux reconnnaître les images pré-classée du corpus d'apprentissage.
+Le réseau neuronal permet au logiciel de reconnaitre des informations nouvelles et de les identifier selon ce qu'il a appris.
+Pour tester la performance du réseau, il va chercher la categorie à laquelle appartient la photo en tentant de retrouver les similitudes entre la photo et le jeu de donnée qu'on lui a enseigné. Chaque couche neuronale permet d'apprendre à reconnaitre un aspect particulier de l'image (oeil, pate...) pour ensuite reconnaitre l'image dans sa globalité. Donc plus on a de couches neuronales plus la reconnaissance est précise.  
+Il est nécessaire de faire tourner le corpus d'apprentissage de nombreuses fois pour que le logiciel apprenne ce que nous souhaitons et soit performant. Mais il ne faut pas qu'il apprenne trop les données que nous lui fournissons, sinon il ne serait plus adaptable à toute les situations que nous lui demanderons sur le sujet en question, et risquerait de se tromper.
+Pour avoir une utilisation intéréssante de cet IA il faut que le logiciel reconnaisse à au moins 97% chaque catégorie de données. Cela nous indique qu'il trouve 97% du temps la bonne catégorie à laquelle appartient l'image, à condition que le jeu de donnée soit significatif (qui'il montre/couvre tous les aspects du sujet). Il faut aussi que le réseau neuronal soit performant pour tous les jeux de donnée que nous lui fournissons.
+Par contre il ne fait pas sur-entrainer le réseau neronale, cela réduirait sa performance sur les données qu'il ne connait pas car n'arriverait plus à faire les liens.
+Si on a beaucoup de catégories différentes avec une centaine d'image mais peu de passe d'apprentissage alors la reconnaissance sera mauvaise.
+
+Au niveau de notre réseau neronal : 
+
+
+# 3 fichiers de sauvegarde du réseau neuronal (.categories, .h5, *.json)
+
+
+# Etudes de réseaux précédemment créés
+
+
+# Graphique à partir du fichier models.csv
+
+
+```{r plot1, include=FALSE}
+library(ggplot2)
+
+models <- read.csv("models.csv", sep=",",
+                   colClasses = c(rep("numeric",2), "character", 
+                                  rep("numeric",2), "character", 
+                                  rep("numeric",2)), 
+                   na.strings = "NA")
+
+str(models)
+
+names(models) <- c("Nb_classes", "Nb_neuro", "Dataset_train", "Nb_image_train", "Nb_passes", "Dataset_test", "Nb_image_test", "Tx_success")
+models$Factor <- paste(models$Nb_neuro, models$Dataset_train)
+
+#Graphe Tx de succés selon le nb de passes
+
+png("plot1.png", width = 800, height = 600)
+qplot(Nb_passes, Tx_success, data = models, color=Factor, geom = c("point", "line"))
+dev.off()
+```
+```{r graphplot1, echo=FALSE, out.width='100%', fig.align="center"}
+
+#Inclure le png du chunk r plot1
+
+knitr::include_graphics("plot1.png")
+
+```
+--> Explication des résultats
+
+# Remarques
+
+
+
