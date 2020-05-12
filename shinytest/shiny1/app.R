@@ -1,6 +1,7 @@
 library(shiny)
 
-# Define UI for application that draws a histogram
+### Partie UI
+
 ui <- fluidPage(
   # Application title
   titlePanel(
@@ -10,6 +11,9 @@ ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
+      
+      ### Fonction pour entrer le nom renvoi un texte d'acceuil
+      
       textInput("name", "Entrez votre nom ici :")
     ),
     
@@ -17,12 +21,21 @@ ui <- fluidPage(
       textOutput("txtaccueil"))
   ),
   
+  
+  ### Fonction qui associe un message au radiobutton choisi
+  
   radioButtons(inputId = "idRadio", 
                label = "Choisi une heure :", 
                selected = 4,
                choices = c("8h" = "Wake up", "12h" = "Bon Appétit", "18h" = "ON EN A GROS !!!", "20h" = "On se fait un Sloubi ?")),
   textOutput("txt"),
- 
+  
+  ### Ajout d'un bouton "Le jeu de l'heure"
+  
+  actionButton("button1", "Mais que faire à cette heure ?"),
+  
+  ### Liste déroulante, renvoi un message a chaque sloubi choisi
+  
   selectInput(inputId = "idsloubi",
               label = "Choisi un sloubi :",
               selected = NULL,
@@ -30,8 +43,16 @@ ui <- fluidPage(
                           "Sloubi 2" = "rakatak-mik", "Sloubi 3" = "kayak-kata",
                           "Sloubi 4" = "joue ganoue", "Sloubi 5" = "jeu boulin",
                           "Sloubi 6" = "jeu carré", "Sloubi 7" = "doublette")),
-  textOutput("txtsloubi"),  
-  titlePanel("Image output"),
+  textOutput("txtsloubi"),
+  
+  ### Un deuxieme bouton "Le jeu sloubi"
+  
+  actionButton("button2", "Voit la relance sloubi"),
+  
+  
+  ### Fonction associe une image au choix a puce choisi
+  
+  titlePanel("Tirage d'image"),
   
   fluidRow(
     column(4, wellPanel(
@@ -40,21 +61,41 @@ ui <- fluidPage(
     )),
     column(4,
            imageOutput("image2")
-    )
+    ),
+    ### 3eme boutton "tirage d'image"
+    actionButton("button3", "A quoi servent ces puces")
   )
   )
 
-# Define server logic required to draw a histogram
+
+
+
+### Partie server
+
 server <- function(input, output) {
+  
+  ### Renvoie le message d'accueil
+  
   output$txtaccueil <- renderText(
     paste("Bien le bonjour", input$name, "!")
   )
+  
+  ### Renvoi pour la fonction idradio (les radiobuttons, jeu de l'heure)
+  observeEvent(input$button1,{
   output$txt <- renderText({
-    paste (input$idRadio)
+    paste (input$idRadio)})
   })
-  output$txtsloubi <- renderText({
-    paste (input$idsloubi)
+  
+  ### Supposé faire apparaitre la fonction radiobutton que quand le bouton est cliqué
+  
+  observeEvent(input$button2,{
+  output$txtsloubi <- renderText({ ### renvoie le texte du jeu sloubi
+    paste (input$idsloubi)})
 })
+  
+  ### Sortie pour le tirage d'image
+  
+  observeEvent(input$button3,{
   output$image2 <- renderImage({
     if (is.null(input$picture))
       return(NULL)
@@ -73,7 +114,7 @@ server <- function(input, output) {
       ))
     }
     
-  }, deleteFile = FALSE)
+  }, deleteFile = FALSE)})
   
 }
 
