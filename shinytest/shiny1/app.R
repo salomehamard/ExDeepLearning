@@ -18,13 +18,13 @@ ui <- fluidPage(
   ),
   
   radioButtons(inputId = "idRadio", 
-               label = "Choisi une heure !", 
+               label = "Choisi une heure :", 
                selected = 4,
                choices = c("8h" = "Wake up", "12h" = "Bon Appétit", "18h" = "ON EN A GROS !!!", "20h" = "On se fait un Sloubi ?")),
   textOutput("txt"),
  
   selectInput(inputId = "idsloubi",
-              label = "Choisis un sloubi",
+              label = "Choisi un sloubi :",
               selected = NULL,
               choices = c("Slouby 1" = "Chante sloubi",
                           "Sloubi 2" = "rakatak-mik", "Sloubi 3" = "kayak-kata",
@@ -36,7 +36,7 @@ ui <- fluidPage(
   fluidRow(
     column(4, wellPanel(
       radioButtons("picture", "Picture:",
-                   c("Un peu de latin", "C'est pas faut"))
+                   c("Un peu de latin", "C'est pas faux"))
     )),
     column(4,
            imageOutput("image2")
@@ -59,11 +59,11 @@ server <- function(input, output) {
     if (is.null(input$picture))
       return(NULL)
     
-    if (input$picture == "C'est pas faut") {
+    if (input$picture == "C'est pas faux") {
       return(list(
         src = "0c6c319447cea2759446e6f2266a69af.png",
         contentType = "image/png",
-        alt = "C'est pas faut"
+        alt = "C'est pas faux"
       ))
     } else if (input$picture == "Un peu de latin") {
       return(list(
