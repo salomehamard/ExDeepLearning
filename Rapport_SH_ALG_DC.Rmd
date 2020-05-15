@@ -22,19 +22,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##  Catégories
 
-  Le choix des catégories doit être assez large car la reconnaissance de différences infimes n'apporteraient aucun résultats concluents.Il est néessaire que chaque catégorie contienne un nombre assez élevé d'éléments, plus il y a de photos pour alimenter le corpus d'apprentissage, meilleure sera la reconaissance des catégories. 
+  Le choix des catégories doit être assez large car la reconnaissance de différences infimes n'apporteraient aucun résultats concluents.Il est nécessaire que chaque catégorie contienne un nombre assez élevé d'éléments. Il semblerait d'ailleurs logique que plus il y a de photos pour alimenter le corpus d'apprentissage, meilleure sera la reconaissance des catégories. 
 Nous avons choisit les catégories suivantes : Ornithorynque, Licorne et Canard.
 
 
 ##  Remarques sur la constitution du corpus d'apprentissage
 
+
   Un corpus d'apprentissage est constitué d'une base de donnée d'images déjà identifiés comme appartenant à telle ou telle catégories. La catégorie de chaque image est connue et a été vérifiée. Par la suite, ce corpus d'apprentissage va être séparé en deux sous-ensemble : un ensemble d'apprentissage à proprement dit et un ensemble de contrôle auquel le réseau neuronal pourra comparer ses réponses.
   
 Il est important que la séparation en deux sous-ensemble soit le plus aléatoire possible, ce découpage a donc été réalisé via un script de découpage aléatoire.
-La construction d'un corpus d'apprentissage est complexe. Il est nécessaire d'avoir une bonne base de donnée pour que le programme ait assez de renseignement sur le sujet, et qu'il sache identfier n'importe quelle image traitant d'un même sujet sans se tromper. Il faut éviter les données erronées, qui pouraient endommager le corpus d'apprentissage. Los de la construction de ce corpus certaines images sont mises de côté par le programme car elle ne sont pas assez représentatives.
+La construction d'un corpus d'apprentissage est complexe. Il est nécessaire d'avoir une bonne base de donnée pour que le programme ait assez de renseignements sur le sujet, et qu'il sache identfier n'importe quelle image traitant d'un même sujet sans se tromper. Il faut éviter les données erronées, qui pouraient endommager le corpus d'apprentissage. Lors de la construction de ce corpus certaines images sont mises de côté par le programme car elle ne sont pas assez représentatives.
 
 Nous avons importé 100 images pour chaque catégorie. Ce corpus d'apprentissage n'est pas très grand. Le travail du réseau neuronal ne sera donc pas très riche mais tout de même composé d'une base de donnée "propre".
-Plus le corpus d'apprentissage est grand, plus il sera performant et donc plus le réseau neuronal aura une reconnaissance correcte.
+Dans la logique qui est la notre, plus le corpus d'apprentissage est grand, plus il sera performant et donc plus le réseau neuronal aura une reconnaissance correcte.
 
 ##  Remarques sur la création de votre réseau neuronal et sa performance
 
@@ -81,6 +82,7 @@ knitr::include_graphics("plot1.png")
 ```
 
 Il est interessant de noter que le nombre de passes n'est pas positivement corrélé avec le taux de réussite, par interprétation rapide, il semblerait que ce ne soit pas le cas non plus pour le nombre de neurones connectés, ni pour le nombre de photos du corpus d'apprentissage.
+Ces points mériteraient d'être creusés afin de vérifier la courbe de réponse du taux de succés de l'IA en fonction du nombre de passes et également du nombre de photos d'entrainement dans le corpus d'apprentissage.
 
 # Remarques
 
@@ -91,4 +93,3 @@ Il est interessant de noter que le nombre de passes n'est pas positivement corr�
   Personnelement, j'aurais préférée passer du temps à m'approprier des outils que j'aurais pu être amené à utiliser plus tard. Par ailleurs, n'ayant jamais appris les bases du codage, hormis quelques heures l'année dernières (qui n'était pas non plus une initiation pour des gens ayant zéro connaissance du sujet), je me suis sentie assez souvent perdue, ajouter à cela un matériel peu performant, même avec de la bonne volonté, les cours ont été difficile à suivre, mais ils restent néanmoins interessants.
   
   
-
