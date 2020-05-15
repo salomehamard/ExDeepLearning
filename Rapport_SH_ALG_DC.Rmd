@@ -28,7 +28,8 @@ Nous avons choisit les catégories suivantes : Ornithorynque, Licorne et Canard.
 
 ##  Remarques sur la constitution du corpus d'apprentissage
 
-  Un corpus d'apprentissage est constitué d'une base de donnée d'images déjà identifiés comme appartenant à telle ou telle catégories. La catégorie de chaque image est connue et a été vérifié. Par la suite, ce corpus d'apprentissage va être séparé en deux sous-ensemble : un ensemble d'apprentissage à proprement parler et un ensemble de contrôle auquel le réseau neuronal pourra comparer ses réponses.
+
+  Un corpus d'apprentissage est constitué d'une base de donnée d'images déjà identifiés comme appartenant à telle ou telle catégories. La catégorie de chaque image est connue et a été vérifiée. Par la suite, ce corpus d'apprentissage va être séparé en deux sous-ensemble : un ensemble d'apprentissage à proprement dit et un ensemble de contrôle auquel le réseau neuronal pourra comparer ses réponses.
   
 Il est important que la séparation en deux sous-ensemble soit le plus aléatoire possible, ce découpage a donc été réalisé via un script de découpage aléatoire.
 La construction d'un corpus d'apprentissage est complexe. Il est nécessaire d'avoir une bonne base de donnée pour que le programme ait assez de renseignements sur le sujet, et qu'il sache identfier n'importe quelle image traitant d'un même sujet sans se tromper. Il faut éviter les données erronées, qui pouraient endommager le corpus d'apprentissage. Lors de la construction de ce corpus certaines images sont mises de côté par le programme car elle ne sont pas assez représentatives.
@@ -41,20 +42,16 @@ Dans la logique qui est la notre, plus le corpus d'apprentissage est grand, plus
   Ensuite il faut entrainer le réseau de neurone. Pour cela, on lui donne accés aux photos du corpus d'apprentissage (constitué des différentes catégories), et le programme va essayer de reconnaitre la catégorie à laquelle appartient la photo puis il va comparer sa réponse avec les photos du dossier de contrôle qui ont été identifié par les humains. Si sa réponse correspond, alors il garde en memoire sa réussite, sinon la réponse est éliminée et le réseau neuronal est modifié. Au fur et à mesure que le programme balaye le corpus d'apprentissage, les connexions entre les différents neuronnes du réseau vont être réorganisé afin de mieux en mieux reconnnaître les images pré-classée du corpus d'apprentissage.
 Le réseau neuronal permet au logiciel de reconnaitre des informations nouvelles et de les identifier selon ce qu'il a appris.
 
-Pour tester la performance du réseau, il va chercher la categorie à laquelle appartient la photo en tentant de retrouver les similitudes entre la photo et le jeu de donnée qu'on lui a enseigné. Chaque couche neuronale permet d'apprendre à reconnaitre un aspect particulier de l'image (couleur, oeil, pate...) pour ensuite reconnaitre l'image dans sa globalité. Donc plus on a de couches neuronales plus la reconnaissance est précise.  
+Pour tester la performance du réseau, il va chercher la categorie à laquelle appartient la photo en tentant de retrouver les similitudes entre la photo et le jeu de donnée qu'on lui a enseigné. Chaque couche neuronale permet d'apprendre à reconnaitre un aspect particulier de l'image (oeil, patte...) pour ensuite reconnaitre l'image dans sa globalité. Donc plus on a de couches neuronales plus la reconnaissance est précise.  
 Il est nécessaire de faire tourner le corpus d'apprentissage de nombreuses fois pour que le logiciel apprenne ce que nous souhaitons et soit performant. Mais il ne faut pas qu'il apprenne trop les données que nous lui fournissons, sinon il ne serait plus adaptable à toute les situations que nous lui demanderons sur le sujet en question, et risquerait de se tromper.
-Pour avoir une utilisation intéréssante de cet IA il faut que le logiciel reconnaisse à au moins 97% chaque catégorie de données. Cela nous indique qu'il trouve 97% du temps la bonne catégorie à laquelle appartient l'image, à condition que le jeu de donnée soit significatif (qui'il montre/couvre tous les aspects du sujet). Il faut aussi que le réseau neuronal soit performant pour tous les jeux de donnée que nous lui fournissons.
-Par contre il ne fait pas sur-entrainer le réseau neuronal, cela réduirait sa performance sur les données qu'il ne connait pas car n'arriverait plus à faire les liens.
-Si on a beaucoup de catégories différentes avec une centaine d'image mais peu de passe d'apprentissage alors la reconnaissance sera mauvaise.
+Pour avoir une utilisation intéréssante de cet IA il faut que le logiciel reconnaisse à au moins 97% chaque catégorie de données. Cela nous indique qu'il trouve 97% du temps la bonne catégorie à laquelle appartient l'image, à condition que le jeu de donné soit significatif (qui'il montre/couvre tous les aspects du sujet). Il faut aussi que le réseau neuronal soit performant pour tous les jeux de donnée que nous lui fournissons.
 
-Au niveau de notre réseau neronal : 
+Nous avons créé un réseau neuronal avec les 3 catégories décrites précédement. Nos résultats sont insatisfaisant car les résultats de l'apprentissage nous ont révélé que le logiciel reconnaissait à 32% la catégorie ornithorynque, à 21% les canards et à 0% les licornes. Le résultat global étant de 18% dans le meilleur des cas. Le corpus d'apprentissage à été joué 25 fois. Nous en concluons que notre corpus d'apprentissage n'est pas assez performant. Nous avons donc pris la décision d'enlever une catégirie et de voir si le programe est plus efficace. En effet nos résultats sont meilleurs: le résultat global se situe à 64 % en ayant fait tourner le corpus d'apprentissage 10 fois. Ce nombre de passe est l'otimum car avec plus de passes nous n'avons pas un si bon résultat. Nous pouvons remarquer que l'apprentissage est de 100% pour la catégorie licorne mais que de 29% pour les ornithorynque. Le problème est que les 3/4 des ornithorynques sont identifiés comme des licornes par le logiciel. Les résultats que nous avons obtenus ne sont pas performants car notre base de donnée n'est pas assez développée. Avec une banque d'image plus riche (1000 images par catégories), nous aurions probablement eu un réseau neuronal plus performant.
+
 
 # Etudes de réseaux précédemment créés
 
-
-# Graphique à partir du fichier models.csv
-
-  Le tableau models.csv présente les résultats de plusieurs essais de réseaux neuronaux. Sont répertoriés les nombres de neurones connectés dans la dernière couche, 128 ou 512 selon les modélité, le nom du corpus d'apprentissage avec le nombre de photos qu'il contient (50 ou 100 pour le corpus savane et inconnu pour le corpus catdog), le nombre de catégorie à traiter dans le corpus, le nombre de passes d'apprentissage et entre autres données le taux de réussité du réseau neuronal. Le tout a donc été repris dans le graphique suivant avec comme facteurs les Corpus associés a leur nombre de photos d'apprentissages, en abscisse le nombre de passes et en ordonnée le taux de réussite.
+  Le tableau models.csv présente les résultats de plusieurs essais de réseaux neuronaux. Sont répertoriés les nombres de neurones connectés dans la dernière couche, 128 ou 512 selon les modalités, le nom du corpus d'apprentissage avec le nombre de photos qu'il contient (50 ou 100 pour le corpus savane et inconnu pour le corpus catdog), le nombre de catégorie à traiter dans le corpus, le nombre de passes d'apprentissage et entre autres données le taux de réussite du réseau neuronal. Le tout a donc été repris dans le graphique suivant avec comme facteurs les Corpus associés à leurs nombre de photos d'apprentissages, en abscisse le nombre de passes et en ordonnée le taux de réussite.
 
 ```{r plot1, include=FALSE}
 library(ggplot2)
@@ -73,7 +70,7 @@ models$Factor <- paste(models$Nb_neuro, models$Dataset_train)
 #Graphe Tx de succés selon le nb de passes
 
 png("plot1.png", width = 800, height = 600)
-qplot(Nb_passes, Tx_success, data = models, color=Factor, geom = c("point", "line"))
+qplot(Nb_passes, Tx_success, data = models, color=Factor, geom = c("point", "line"), main = "Performance des réseaux en fonction du nombre de passes du corpus d'apprentissage")
 dev.off()
 ```
 ```{r graphplot1, echo=FALSE, out.width='100%', fig.align="center"}
@@ -89,5 +86,10 @@ Ces points mériteraient d'être creusés afin de vérifier la courbe de répons
 
 # Remarques
 
-  Daprés les résultats que nous avons obtenus avec notre propre réseau neuronal, il semblerait qu'il y ait un nombre de passes optimal comme on peut l'apercevoir pour la courbe représentant les résultats du corpus 128catdog.
-
+  Daprés les résultats que nous avons obtenus avec notre propre réseau neuronal, il semblerait qu'il y ait un nombre de passes optimal comme on peut l'apecrevoir pour la courbes représentant les résultats du corpus 128ctadog.
+  
+  En ce qui concerne la séance, elle nous a permis d'intégrer les concepts de bases du fonctionnement de l'intelligence artificiel. Cela est très intéressant, mais il semble peu probable que nous puissions nous servir ou développer ce type d'outils dans notre vie future, a moins que l'on souhaite aredemment développer ces savoirs. 
+  
+  Personnelement, j'aurais préférée passer du temps à m'approprier des outils que j'aurais pu être amené à utiliser plus tard. Par ailleurs, n'ayant jamais appris les bases du codage, hormis quelques heures l'année dernières (qui n'était pas non plus une initiation pour des gens ayant zéro connaissance du sujet), je me suis sentie assez souvent perdue, ajouter à cela un matériel peu performant, même avec de la bonne volonté, les cours ont été difficile à suivre, mais ils restent néanmoins interessants.
+  
+  
